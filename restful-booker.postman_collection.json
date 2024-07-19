@@ -20,9 +20,18 @@
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'token' exists\", function() {\r",
+									"  pm.expect(response).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'token' is a string\", function () {\r",
+									"    pm.expect(response.token).to.be.an('string');\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -61,9 +70,18 @@
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'reason' exists\", function() {\r",
+									"  pm.expect(response).to.have.property('reason');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'reason' is a string\", function () {\r",
+									"    pm.expect(response.reason).to.be.an('string');\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -107,9 +125,23 @@
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Expected response is an array\", function () {\r",
+									"    pm.expect(response).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' exists\", function() {\r",
+									"  pm.expect(response[0].bookingid).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
+									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
+									"});\r",
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -127,25 +159,25 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "sally",
+									"value": "Eric",
 									"description": "Return bookings with a specific firstname",
 									"disabled": true
 								},
 								{
 									"key": "lastname",
-									"value": "brown",
+									"value": "Jones",
 									"description": "Return bookings with a specific lastname",
 									"disabled": true
 								},
 								{
 									"key": "checkin",
-									"value": "2024-02-20",
+									"value": "2022-01-19",
 									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
 									"disabled": true
 								},
 								{
 									"key": "checkout",
-									"value": "2024-03-01",
+									"value": "2022-09-06",
 									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
 									"disabled": true
 								}
@@ -155,7 +187,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_name",
+					"name": "getBookingIds_filter_by_fullName",
 					"event": [
 						{
 							"listen": "test",
@@ -165,9 +197,23 @@
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Expected response is an array\", function () {\r",
+									"    pm.expect(response).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' exists\", function() {\r",
+									"  pm.expect(response[0].bookingid).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
+									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
+									"});\r",
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -175,7 +221,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/booking?firstname=sally&lastname=brown",
+							"raw": "{{base_url}}/booking?firstname=Eric&lastname=Jones",
 							"host": [
 								"{{base_url}}"
 							],
@@ -185,23 +231,23 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "sally",
+									"value": "Eric",
 									"description": "Return bookings with a specific firstname"
 								},
 								{
 									"key": "lastname",
-									"value": "brown",
+									"value": "Jones",
 									"description": "Return bookings with a specific lastname"
 								},
 								{
 									"key": "checkin",
-									"value": "2024-02-20",
+									"value": "2022-01-19",
 									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
 									"disabled": true
 								},
 								{
 									"key": "checkout",
-									"value": "2024-03-01",
+									"value": "2022-09-06",
 									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
 									"disabled": true
 								}
@@ -221,9 +267,23 @@
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.test(\"Expected response is an array\", function () {\r",
+									"    pm.expect(response).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' exists\", function() {\r",
+									"  pm.expect(response[0].bookingid).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
+									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
+									"});\r",
+									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -231,7 +291,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/booking?checkin=2024-02-20&checkout=2024-03-01",
+							"raw": "{{base_url}}/booking?checkin=2022-01-19&checkout=2022-09-06",
 							"host": [
 								"{{base_url}}"
 							],
@@ -241,24 +301,24 @@
 							"query": [
 								{
 									"key": "firstname",
-									"value": "sally",
+									"value": "Eric",
 									"description": "Return bookings with a specific firstname",
 									"disabled": true
 								},
 								{
 									"key": "lastname",
-									"value": "brown",
+									"value": "Jones",
 									"description": "Return bookings with a specific lastname",
 									"disabled": true
 								},
 								{
 									"key": "checkin",
-									"value": "2024-02-20",
+									"value": "2022-01-19",
 									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD"
 								},
 								{
 									"key": "checkout",
-									"value": "2024-03-01",
+									"value": "2022-09-06",
 									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD"
 								}
 							]
@@ -268,6 +328,65 @@
 				},
 				{
 					"name": "getBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'firstname' exists\", function() {\r",
+									"  pm.expect(response.firstname).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'firstname' is a string\", function() {\r",
+									"  pm.expect(response.firstname).to.be.an('string');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createBooking",
 					"event": [
 						{
 							"listen": "test",
@@ -293,28 +412,200 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Jim\",\r\n    \"lastname\": \"Brown\",\r\n    \"totalprice\": 111,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-02-01\",\r\n        \"checkout\": \"2024-03-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}'",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/booking/:id",
+							"raw": "{{base_url}}/booking",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Jim\",\r\n    \"lastname\": \"Brown\",\r\n    \"totalprice\": 112,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-02-01\",\r\n        \"checkout\": \"2024-03-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/2106",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{bookingid}}"
+								"2106"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partialUpdateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Jim\",\r\n    \"lastname\": \"Brown\",\r\n    \"totalprice\": 112,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-02-01\",\r\n        \"checkout\": \"2024-03-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/2106",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"2106"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"Jim\",\r\n    \"lastname\": \"Brown\",\r\n    \"totalprice\": 112,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2024-02-01\",\r\n        \"checkout\": \"2024-03-01\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/2106",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								"2106"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "healthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/ping",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
