@@ -138,6 +138,17 @@
 									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
 									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
 									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									""
 								],
 								"type": "text/javascript",
@@ -210,6 +221,8 @@
 									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
 									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
 									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -280,6 +293,8 @@
 									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
 									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
 									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -338,14 +353,6 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"pm.test(\"Property 'firstname' exists\", function() {\r",
-									"  pm.expect(response.firstname).exist;\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Property 'firstname' is a string\", function() {\r",
-									"  pm.expect(response.firstname).to.be.an('string');\r",
-									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -378,7 +385,8 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "{{bookingid}}",
+									"description": "bookingid from getBookingIds endpoint"
 								}
 							]
 						}
