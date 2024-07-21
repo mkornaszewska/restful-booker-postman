@@ -270,7 +270,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_checkin_checkout",
+					"name": "getBookingIds_filter_by_checkin",
 					"event": [
 						{
 							"listen": "test",
@@ -330,6 +330,79 @@
 									"key": "checkin",
 									"value": "2022-01-19",
 									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD"
+								},
+								{
+									"key": "checkout",
+									"value": "2022-09-06",
+									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds_filter_by_checkout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Expected response is an array\", function () {\r",
+									"    pm.expect(response).to.be.an('array');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' exists\", function() {\r",
+									"  pm.expect(response[0].bookingid).exist;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Property 'bookingid' is a number\", function() {\r",
+									"  pm.expect(response[0].bookingid).to.be.an('number');\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?checkout=2022-09-06",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Eric",
+									"description": "Return bookings with a specific firstname",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Jones",
+									"description": "Return bookings with a specific lastname",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2022-01-19",
+									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
+									"disabled": true
 								},
 								{
 									"key": "checkout",
