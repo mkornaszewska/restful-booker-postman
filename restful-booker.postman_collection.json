@@ -115,7 +115,7 @@
 			"name": "booking",
 			"item": [
 				{
-					"name": "getBookingIds",
+					"name": "getBookingIds(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -206,7 +206,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_firstName",
+					"name": "getBookingIds_filter_by_firstName(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -287,7 +287,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_lastName",
+					"name": "getBookingIds_filter_by_lastName(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -368,7 +368,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_checkin",
+					"name": "getBookingIds_filter_by_checkin(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -449,7 +449,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_checkout",
+					"name": "getBookingIds_filter_by_checkout(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -530,7 +530,7 @@
 					"response": []
 				},
 				{
-					"name": "getBooking",
+					"name": "getBooking(WIP)",
 					"event": [
 						{
 							"listen": "test",
@@ -627,7 +627,7 @@
 					"response": []
 				},
 				{
-					"name": "createBooking(WIP)",
+					"name": "createBooking",
 					"event": [
 						{
 							"listen": "test",
@@ -640,44 +640,41 @@
 									"});\r",
 									"\r",
 									"const schema = {\r",
-									"    \"properties\": {\r",
-									"        \"bookingdates\": {\r",
-									"            \"properties\": {\r",
-									"                \"checkin\": {\r",
-									"                    \"format\": \"date\",\r",
-									"                    \"type\": \"string\"\r",
+									"    \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"bookingid\": { \"type\": \"integer\"},\r",
+									"            \"booking\": {\r",
+									"                \"properties\": {\r",
+									"                    \"firstname\": {\"type\": \"string\"},\r",
+									"                    \"lastname\":  {\"type\": \"string\"},\r",
+									"                    \"totalprice\": {\"type\": \"number\"},\r",
+									"                    \"depositpaid\": {\"type\": \"boolean\"},\r",
+									"                        \"bookingdates\": {\r",
+									"                            \"properties\": {\r",
+									"                                \"checkin\": {\"type\": \"string\", \"format\": \"date\"},\r",
+									"                                \"checkout\": {\"type\": \"string\", \"format\": \"date\"}\r",
+									"                                },\r",
+									"                                \"required\": [\"checkin\", \"checkout\"]\r",
+									"                             },\r",
+									"                    \"additionalneeds\": {\"type\": \"string\"}\r",
+									"                        },\r",
+									"                    \"required\": [\"firstname\", \"lastname\", \"totalprice\", \"depositpaid\", \"bookingdates\", \"additionalneeds\"]\r",
+									"                     }\r",
 									"                },\r",
-									"                \"checkout\": {\r",
-									"                    \"format\": \"date\",\r",
-									"                    \"type\": \"string\"\r",
-									"                }\r",
-									"            },\r",
-									"            \"required\": [\r",
-									"                \"checkin\",\r",
-									"                \"checkout\"\r",
-									"            ],\r",
-									"            \"type\": \"object\"\r",
-									"        },\r",
-									"        \"bookingid\": {\r",
-									"            \"type\": \"integer\"\r",
-									"        },\r",
-									"        \"booking\": { \r",
-									"            \"properties\": {\r",
-									"                \"firstname\": {\r",
-									"                    \"type\": \"string\"\r",
-									"                }\r",
-									"            }\r",
-									"        }\r",
-									"    },\r",
-									"    \"required\": [\r",
-									"        \"bookingid\"\r",
-									"    ],\r",
-									"    \"type\": \"object\"\r",
-									"}\r",
+									"            \"required\": [\"bookingid\", \"booking\"]\r",
+									"        };\r",
 									"\r",
 									"pm.test(\"Validate schema\", () => {\r",
 									"    pm.response.to.have.jsonSchema(schema);\r",
-									"});"
+									"});\r",
+									"\r",
+									"pm.environment.set(\"firstname\", response.booking.firstname);\r",
+									"pm.environment.set(\"lastname\", response.booking.lastname);\r",
+									"pm.environment.set(\"depositpaid\", response.booking.depositpaid);\r",
+									"pm.environment.set(\"checkin\", response.booking.bookingdates.checkin);\r",
+									"pm.environment.set(\"checkout\", response.booking.bookingdates.checkout);\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
