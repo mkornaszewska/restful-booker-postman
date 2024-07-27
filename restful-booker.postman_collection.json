@@ -132,30 +132,30 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"const response = pm.response.json();\r",
+									"let response = pm.response.json();\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"const schema = {\r",
-									"    \"type\": \"array\",\r",
-									"    \"items\": {\r",
-									"        \"minItems\": 2,\r",
-									"        \"type\": \"object\",\r",
-									"        \"properties\": {\r",
-									"            \"bookingid\": {\r",
-									"                \"type\": \"integer\"\r",
-									"            }\r",
-									"        },\r",
-									"        \"required\": [\r",
-									"            \"bookingid\"\r",
-									"        ]\r",
-									"    },\r",
-									"};\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
-									"pm.response.to.have.jsonSchema(schema);\r",
+									"const schema = {\r",
+									"\r",
+									"\t\"items\": {\r",
+									"\t\"minItems\": 5,\r",
+									"\t\"type\": \"array\",\r",
+									"\t\"type\": \"object\",\r",
+									"\t\"properties\": {\r",
+									"\t\t\"bookingid\": {\"type\": \"integer\"}\r",
+									"\t\t},\r",
+									"\t\"required\": [\"bookingid\"]\r",
+									"\t}\r",
+									"}\r",
+									"pm.test(\"Validate JSON schema\", () => {pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
@@ -218,7 +218,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_firstName",
+					"name": "getBookingIds_filter_existing_firstName",
 					"event": [
 						{
 							"listen": "test",
@@ -230,10 +230,15 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
 									"const schema = {\r",
 									"    \"type\": \"array\",\r",
 									"    \"items\": {\r",
-									"        \"minItems\": 2,\r",
+									"        \"minItems\": 1,\r",
 									"        \"type\": \"object\",\r",
 									"        \"properties\": {\r",
 									"            \"bookingid\": {\r",
@@ -246,7 +251,7 @@
 									"    },\r",
 									"};\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
 									"pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
@@ -299,7 +304,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_lastName",
+					"name": "getBookingIds_filter_existing_lastName",
 					"event": [
 						{
 							"listen": "test",
@@ -311,10 +316,15 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
 									"const schema = {\r",
 									"    \"type\": \"array\",\r",
 									"    \"items\": {\r",
-									"        \"minItems\": 2,\r",
+									"        \"minItems\": 1,\r",
 									"        \"type\": \"object\",\r",
 									"        \"properties\": {\r",
 									"            \"bookingid\": {\r",
@@ -327,7 +337,7 @@
 									"    },\r",
 									"};\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
 									"pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
@@ -380,7 +390,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_checkin",
+					"name": "getBookingIds_filter_existing_checkin",
 					"event": [
 						{
 							"listen": "test",
@@ -392,10 +402,15 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
 									"const schema = {\r",
 									"    \"type\": \"array\",\r",
 									"    \"items\": {\r",
-									"        \"minItems\": 2,\r",
+									"        \"minItems\": 1,\r",
 									"        \"type\": \"object\",\r",
 									"        \"properties\": {\r",
 									"            \"bookingid\": {\r",
@@ -408,7 +423,7 @@
 									"    },\r",
 									"};\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
 									"pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
@@ -461,7 +476,7 @@
 					"response": []
 				},
 				{
-					"name": "getBookingIds_filter_by_checkout",
+					"name": "getBookingIds_filter_existing_checkout",
 					"event": [
 						{
 							"listen": "test",
@@ -473,10 +488,15 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
 									"const schema = {\r",
 									"    \"type\": \"array\",\r",
 									"    \"items\": {\r",
-									"        \"minItems\": 2,\r",
+									"        \"minItems\": 1,\r",
 									"        \"type\": \"object\",\r",
 									"        \"properties\": {\r",
 									"            \"bookingid\": {\r",
@@ -489,7 +509,7 @@
 									"    },\r",
 									"};\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
 									"pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
@@ -628,6 +648,11 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
 									"const schema = {\r",
 									"    \"type\": \"object\",\r",
 									"        \"properties\": {\r",
@@ -662,6 +687,9 @@
 									"pm.environment.set(\"depositpaid\", response.booking.depositpaid);\r",
 									"pm.environment.set(\"checkin\", response.booking.bookingdates.checkin);\r",
 									"pm.environment.set(\"checkout\", response.booking.bookingdates.checkout);\r",
+									"pm.environment.set(\"idToUpdate\", response.bookingid);\r",
+									"\r",
+									"pm.environment.set(\"req\", pm.request)\r",
 									"\r",
 									""
 								],
@@ -691,7 +719,13 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"firstname\": \"{{$randomFirstName}}\",\r\n    \"lastname\": \"{{$randomLastName}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{$randomBoolean}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{pastDate}}\",\r\n        \"checkout\": \"{{futureDate}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}",
@@ -888,35 +922,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "healthCheck",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript",
-						"packages": {}
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_url}}/ping",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"ping"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }
