@@ -139,600 +139,6 @@
 			"name": "booking",
 			"item": [
 				{
-					"name": "getBookingIds",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"let response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"\r",
-									"\t\"items\": {\r",
-									"\t\"minItems\": 5,\r",
-									"\t\"type\": \"array\",\r",
-									"\t\"type\": \"object\",\r",
-									"\t\"properties\": {\r",
-									"\t\t\"bookingid\": {\"type\": \"integer\"}\r",
-									"\t\t},\r",
-									"\t\"required\": [\"bookingid\"]\r",
-									"\t}\r",
-									"}\r",
-									"pm.test(\"Validate JSON schema\", () => {pm.response.to.have.jsonSchema(schema);\r",
-									"});\r",
-									"\r",
-									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "Eric",
-									"description": "Return bookings with a specific firstname",
-									"disabled": true
-								},
-								{
-									"key": "lastname",
-									"value": "Jones",
-									"description": "Return bookings with a specific lastname",
-									"disabled": true
-								},
-								{
-									"key": "checkin",
-									"value": "2022-01-19",
-									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
-									"disabled": true
-								},
-								{
-									"key": "checkout",
-									"value": "2022-09-06",
-									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBookingIds_filter_existing_firstName",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"    \"type\": \"array\",\r",
-									"    \"items\": {\r",
-									"        \"minItems\": 1,\r",
-									"        \"type\": \"object\",\r",
-									"        \"properties\": {\r",
-									"            \"bookingid\": {\r",
-									"                \"type\": \"integer\"\r",
-									"            }\r",
-									"        },\r",
-									"        \"required\": [\r",
-									"            \"bookingid\"\r",
-									"        ]\r",
-									"    },\r",
-									"};\r",
-									"\r",
-									"pm.test(\"Validate JSON schema\", () => {\r",
-									"pm.response.to.have.jsonSchema(schema);\r",
-									"});\r",
-									"\r",
-									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking?firstname=Eric",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "Eric",
-									"description": "Return bookings with a specific firstname"
-								},
-								{
-									"key": "lastname",
-									"value": "Jones",
-									"description": "Return bookings with a specific lastname",
-									"disabled": true
-								},
-								{
-									"key": "checkin",
-									"value": "2022-01-19",
-									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
-									"disabled": true
-								},
-								{
-									"key": "checkout",
-									"value": "2022-09-06",
-									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBookingIds_filter_existing_lastName",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"    \"type\": \"array\",\r",
-									"    \"items\": {\r",
-									"        \"minItems\": 1,\r",
-									"        \"type\": \"object\",\r",
-									"        \"properties\": {\r",
-									"            \"bookingid\": {\r",
-									"                \"type\": \"integer\"\r",
-									"            }\r",
-									"        },\r",
-									"        \"required\": [\r",
-									"            \"bookingid\"\r",
-									"        ]\r",
-									"    },\r",
-									"};\r",
-									"\r",
-									"pm.test(\"Validate JSON schema\", () => {\r",
-									"pm.response.to.have.jsonSchema(schema);\r",
-									"});\r",
-									"\r",
-									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking?lastname=Jones",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "Eric",
-									"description": "Return bookings with a specific firstname",
-									"disabled": true
-								},
-								{
-									"key": "lastname",
-									"value": "Jones",
-									"description": "Return bookings with a specific lastname"
-								},
-								{
-									"key": "checkin",
-									"value": "2022-01-19",
-									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
-									"disabled": true
-								},
-								{
-									"key": "checkout",
-									"value": "2022-09-06",
-									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBookingIds_filter_existing_checkin",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"    \"type\": \"array\",\r",
-									"    \"items\": {\r",
-									"        \"minItems\": 1,\r",
-									"        \"type\": \"object\",\r",
-									"        \"properties\": {\r",
-									"            \"bookingid\": {\r",
-									"                \"type\": \"integer\"\r",
-									"            }\r",
-									"        },\r",
-									"        \"required\": [\r",
-									"            \"bookingid\"\r",
-									"        ]\r",
-									"    },\r",
-									"};\r",
-									"\r",
-									"pm.test(\"Validate JSON schema\", () => {\r",
-									"pm.response.to.have.jsonSchema(schema);\r",
-									"});\r",
-									"\r",
-									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking?checkin=2022-01-19",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "Eric",
-									"description": "Return bookings with a specific firstname",
-									"disabled": true
-								},
-								{
-									"key": "lastname",
-									"value": "Jones",
-									"description": "Return bookings with a specific lastname",
-									"disabled": true
-								},
-								{
-									"key": "checkin",
-									"value": "2022-01-19",
-									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD"
-								},
-								{
-									"key": "checkout",
-									"value": "2022-09-06",
-									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBookingIds_filter_existing_checkout",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"    \"type\": \"array\",\r",
-									"    \"items\": {\r",
-									"        \"minItems\": 1,\r",
-									"        \"type\": \"object\",\r",
-									"        \"properties\": {\r",
-									"            \"bookingid\": {\r",
-									"                \"type\": \"integer\"\r",
-									"            }\r",
-									"        },\r",
-									"        \"required\": [\r",
-									"            \"bookingid\"\r",
-									"        ]\r",
-									"    },\r",
-									"};\r",
-									"\r",
-									"pm.test(\"Validate JSON schema\", () => {\r",
-									"pm.response.to.have.jsonSchema(schema);\r",
-									"});\r",
-									"\r",
-									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking?checkout=2022-09-06",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking"
-							],
-							"query": [
-								{
-									"key": "firstname",
-									"value": "Eric",
-									"description": "Return bookings with a specific firstname",
-									"disabled": true
-								},
-								{
-									"key": "lastname",
-									"value": "Jones",
-									"description": "Return bookings with a specific lastname",
-									"disabled": true
-								},
-								{
-									"key": "checkin",
-									"value": "2022-01-19",
-									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
-									"disabled": true
-								},
-								{
-									"key": "checkout",
-									"value": "2022-09-06",
-									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBooking_existing_booking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Content-Type header is application/json\", function() {\r",
-									"pm.response.to.have.header(\"Content-Type\");\r",
-									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
-									"});\r",
-									"\r",
-									"const schema = {\r",
-									"    \"type\": \"object\",\r",
-									"    \"properties\": {\r",
-									"        \"firstname\": {\"type\": \"string\"},\r",
-									"        \"lastname\": {\"type\": \"string\"},\r",
-									"        \"totalprice\": {\"type\": \"number\"},\r",
-									"        \"depositpaid\": {\"type\": \"boolean\"},\r",
-									"        \"bookingdates\": {\r",
-									"            \"properties\": {\r",
-									"                \"checkin\": {\"type\": \"string\", \"format\": \"date\"},\r",
-									"                \"checkout\": {\"type\": \"string\", \"format\": \"date\"},\r",
-									"            },\r",
-									"            \"required\": [\"checkin\", \"checkout\"]\r",
-									"            }\r",
-									"        },\r",
-									"        \"additionalneeds\": {\"type\": \"string\"},\r",
-									"        \"required\": [\"firstname\", \"lastname\", \"totalprice\", \"depositpaid\", \"additionalneeds\"]\r",
-									"};\r",
-									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
-									"    pm.response.to.have.jsonSchema(schema);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking/:id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{bookingid}}",
-									"description": "bookingid taken from getBookingIds endpoint"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getBooking_nonexisting_booking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Check the active environment\", () => {\r",
-									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
-									"});\r",
-									"\r",
-									"const response = pm.response.json();\r",
-									"\r",
-									"pm.test(\"Status code is 404\", function () {\r",
-									"     pm.expect(pm.response.code).to.eql(404);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/booking/:id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "123345435345435",
-									"description": "Nonexisting booking id"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "createBooking",
 					"event": [
 						{
@@ -1012,6 +418,589 @@
 								{
 									"key": "id",
 									"value": "{{idToUpdate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"let response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"\r",
+									"\t\"items\": {\r",
+									"\t\"minItems\": 5,\r",
+									"\t\"type\": \"array\",\r",
+									"\t\"type\": \"object\",\r",
+									"\t\"properties\": {\r",
+									"\t\t\"bookingid\": {\"type\": \"integer\"}\r",
+									"\t\t},\r",
+									"\t\"required\": [\"bookingid\"]\r",
+									"\t}\r",
+									"}\r",
+									"pm.test(\"Validate JSON schema\", () => {pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Eric",
+									"description": "Return bookings with a specific firstname",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Jones",
+									"description": "Return bookings with a specific lastname",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2022-01-19",
+									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "2022-09-06",
+									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds_filter_existing_firstName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\": {\r",
+									"        \"minItems\": 1,\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"bookingid\": {\r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"            \"bookingid\"\r",
+									"        ]\r",
+									"    },\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?firstname={{firstname}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "lastname",
+									"value": "Jones",
+									"description": "Return bookings with a specific lastname",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2022-01-19",
+									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "2022-09-06",
+									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "firstname",
+									"value": "{{firstname}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds_filter_existing_lastName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\": {\r",
+									"        \"minItems\": 1,\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"bookingid\": {\r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"            \"bookingid\"\r",
+									"        ]\r",
+									"    },\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?lastname={{lastname}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Eric",
+									"description": "Return bookings with a specific firstname",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2022-01-19",
+									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "2022-09-06",
+									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "{{lastname}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds_filter_existing_checkin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\": {\r",
+									"        \"minItems\": 1,\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"bookingid\": {\r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"            \"bookingid\"\r",
+									"        ]\r",
+									"    },\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking?checkin={{checkin}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Eric",
+									"description": "Return bookings with a specific firstname",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Jones",
+									"description": "Return bookings with a specific lastname",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "2022-09-06",
+									"description": "Return bookings that have a checkout date greater than or equal to the set checkout date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "{{checkin}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookingIds_filter_existing_checkout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"array\",\r",
+									"    \"items\": {\r",
+									"        \"minItems\": 1,\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"bookingid\": {\r",
+									"                \"type\": \"integer\"\r",
+									"            }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"            \"bookingid\"\r",
+									"        ]\r",
+									"    },\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking?checkout={{checkout}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "Eric",
+									"description": "Return bookings with a specific firstname",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Jones",
+									"description": "Return bookings with a specific lastname",
+									"disabled": true
+								},
+								{
+									"key": "checkin",
+									"value": "2022-01-19",
+									"description": "Return bookings that have a checkin date greater than or equal to the set checkin date. Format must be CCYY-MM-DD",
+									"disabled": true
+								},
+								{
+									"key": "checkout",
+									"value": "{{checkout}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"m.test(\"Status code is 200\", function(){\r",
+									"pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"firstname\": {\"type\": \"string\"},\r",
+									"        \"lastname\": {\"type\": \"string\"},\r",
+									"        \"totalprice\": {\"type\": \"number\"},\r",
+									"        \"depositpaid\": {\"type\": \"boolean\"},\r",
+									"        \"bookingdates\": {\r",
+									"            \"properties\": {\r",
+									"                \"checkin\": {\"type\": \"string\", \"format\": \"date\"},\r",
+									"                \"checkout\": {\"type\": \"string\", \"format\": \"date\"},\r",
+									"            },\r",
+									"            \"required\": [\"checkin\", \"checkout\"]\r",
+									"            }\r",
+									"        },\r",
+									"        \"additionalneeds\": {\"type\": \"string\"},\r",
+									"        \"required\": [\"firstname\", \"lastname\", \"totalprice\", \"depositpaid\", \"additionalneeds\"]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{bookingid}}",
+									"description": "bookingid taken from getBookingIds endpoint"
 								}
 							]
 						}
