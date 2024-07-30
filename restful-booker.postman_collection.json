@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "651e7bdd-07cc-45f4-bdaa-08e9b9b9aca7",
+		"_postman_id": "d88c1486-cdb1-492c-8159-f06a7c2dbcce",
 		"name": "restful-booker",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29564192"
@@ -42,8 +42,7 @@
 									"pm.environment.set(\"token\", response.token);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -104,8 +103,7 @@
 									"    pm.expect(response.reason).to.be.an('string');\r",
 									"});"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -145,6 +143,10 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
 									"const response = pm.response.json();\r",
 									"\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -181,7 +183,7 @@
 									"            \"required\": [\"bookingid\", \"booking\"]\r",
 									"        };\r",
 									"\r",
-									"pm.test(\"Validate schema\", () => {\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
 									"    pm.response.to.have.jsonSchema(schema);\r",
 									"});\r",
 									"\r",
@@ -192,12 +194,9 @@
 									"pm.environment.set(\"checkout\", response.booking.bookingdates.checkout);\r",
 									"pm.environment.set(\"idToUpdate\", response.bookingid);\r",
 									"\r",
-									"pm.environment.set(\"req\", pm.request)\r",
-									"\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -215,8 +214,7 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -245,180 +243,6 @@
 							],
 							"path": [
 								"booking"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateBooking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "token={{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": \"{{firstname}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{$randomBoolean}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/booking/:id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{idToUpdate}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "partialUpdateBooking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "token={{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": \"{{$randomFirstName}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{$randomBoolean}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/booking/:id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{idToUpdate}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteBooking",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "token={{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/booking/:id",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"booking",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{idToUpdate}}"
-								}
 							]
 						}
 					},
@@ -464,8 +288,7 @@
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -474,8 +297,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -561,8 +383,7 @@
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -571,8 +392,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -660,8 +480,7 @@
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -670,8 +489,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -759,8 +577,7 @@
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -769,8 +586,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -858,8 +674,7 @@
 									"pm.environment.set(\"bookingid\", response[0].bookingid);\r",
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -868,8 +683,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -937,7 +751,7 @@
 									"\r",
 									"const response = pm.response.json();\r",
 									"\r",
-									"m.test(\"Status code is 200\", function(){\r",
+									"pm.test(\"Status code is 200\", function(){\r",
 									"pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
@@ -969,8 +783,7 @@
 									"    pm.response.to.have.jsonSchema(schema);\r",
 									"});"
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						},
 						{
@@ -979,8 +792,7 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript",
-								"packages": {}
+								"type": "text/javascript"
 							}
 						}
 					],
@@ -1001,6 +813,271 @@
 									"key": "id",
 									"value": "{{bookingid}}",
 									"description": "bookingid taken from getBookingIds endpoint"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"booking\": {\r",
+									"                \"properties\": {\r",
+									"                    \"firstname\": {\"type\": \"string\"},\r",
+									"                    \"lastname\":  {\"type\": \"string\"},\r",
+									"                    \"totalprice\": {\"type\": \"number\"},\r",
+									"                    \"depositpaid\": {\"type\": \"boolean\"},\r",
+									"                        \"bookingdates\": {\r",
+									"                            \"properties\": {\r",
+									"                                \"checkin\": {\"type\": \"string\", \"format\": \"date\"},\r",
+									"                                \"checkout\": {\"type\": \"string\", \"format\": \"date\"}\r",
+									"                                },\r",
+									"                                \"required\": [\"checkin\", \"checkout\"]\r",
+									"                             },\r",
+									"                    \"additionalneeds\": {\"type\": \"string\"}\r",
+									"                        },\r",
+									"                    \"required\": [\"firstname\", \"lastname\", \"totalprice\", \"depositpaid\", \"bookingdates\", \"additionalneeds\"]\r",
+									"                     }\r",
+									"                }\r",
+									"        };\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"{{firstname}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{$randomBoolean}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idToUpdate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partialUpdateBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"            \"booking\": {\r",
+									"                \"properties\": {\r",
+									"                    \"firstname\": {\"type\": \"string\"},\r",
+									"                    \"lastname\":  {\"type\": \"string\"},\r",
+									"                    \"totalprice\": {\"type\": \"number\"},\r",
+									"                    \"depositpaid\": {\"type\": \"boolean\"},\r",
+									"                        \"bookingdates\": {\r",
+									"                            \"properties\": {\r",
+									"                                \"checkin\": {\"type\": \"string\", \"format\": \"date\"},\r",
+									"                                \"checkout\": {\"type\": \"string\", \"format\": \"date\"}\r",
+									"                                },\r",
+									"                                \"required\": [\"checkin\", \"checkout\"]\r",
+									"                             },\r",
+									"                    \"additionalneeds\": {\"type\": \"string\"}\r",
+									"                        },\r",
+									"                    \"required\": [\"firstname\", \"lastname\", \"totalprice\", \"depositpaid\", \"bookingdates\", \"additionalneeds\"]\r",
+									"                     }\r",
+									"                }\r",
+									"        };\r",
+									"\r",
+									"pm.test(\"Validate JSON schema\", () => {\r",
+									"    pm.response.to.have.jsonSchema(schema);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"{{$randomFirstName}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalPrice}},\r\n    \"depositpaid\": {{$randomBoolean}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalNeeds}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idToUpdate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBooking",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"restful-booker\");\r",
+									"});\r",
+									"\r",
+									"let response = pm.response.text();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is text/plain\", function() {\r",
+									"pm.response.to.have.header(\"Content-Type\");\r",
+									"pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/plain\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is correct\", function () {\r",
+									"    pm.response.to.have.body(\"Created\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token={{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/booking/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"booking",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{idToUpdate}}"
 								}
 							]
 						}
