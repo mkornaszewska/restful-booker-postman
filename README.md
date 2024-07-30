@@ -1,2 +1,2 @@
-# restful-booker-postman
-Restful booker tests in Postman
+# restful-booker-tests
+Restful booker tests in Postman and RestAssured
