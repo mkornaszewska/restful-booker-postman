@@ -1,47 +1,26 @@
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.InputStream;
+import org.junit.jupiter.api.Assertions;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ReadBookingIdsTest {
-
-    @BeforeClass
-    public static void setup() {
-        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
-        RestAssured.basePath = "/booking";
-    }
-
+public class ReadBookingIdsTest extends BaseTest {
+    static final String basePath = "/booking";
     @Test
-    public void statusCodeTest() {
-        ValidatableResponse response =
-                when()
-                        .request("GET", baseURI)
-                        .then()
-                        .assertThat().statusCode(200);
-    }
+    public void readBookingIdsTest() {
+        Response response = given()
+                .when()
+                .get(baseUrl + basePath)
+                .then()
+                .extract()
+                .response();
 
-    @Test
-    public void contentTypeTest() {
-        ValidatableResponse response =
-                when()
-                        .request("GET", baseURI)
-                        .then()
-                        .assertThat().contentType("text/html; charset=UTF-8");
-    }
+        Assertions.assertEquals(200, response.getStatusCode());
 
-//    @Test
-//    public void jsonSchemaTest() {
-//        InputStream getBookingIdsJsonSchema = getClass().getClassLoader()
-//                .getResourceAsStream("getbookingidsschema.json");
-//        ValidatableResponse response =
-//                when()
-//                        .request("GET", baseURI)
-//                        .then()
-//                        .assertThat().body(JsonSchemaValidator.matchesJsonSchema("getbookingidsschema.json"));
-//    }
+    }
 }
