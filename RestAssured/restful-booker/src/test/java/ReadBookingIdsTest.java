@@ -1,13 +1,8 @@
-import io.restassured.RestAssured;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static io.restassured.RestAssured.given;
 
 public class ReadBookingIdsTest extends BaseTest {
     static final String basePath = "/booking";
