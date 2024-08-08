@@ -3,8 +3,6 @@ package requests.booking;
 import io.restassured.response.Response;
 import requests.BaseRequest;
 
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 
 public class GetBookingRequest {
